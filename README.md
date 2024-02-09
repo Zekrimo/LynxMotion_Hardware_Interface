@@ -1,0 +1,2 @@
+# LynxMotion_Hardware_Interface
+lynxmotion_ssc_32u Controller
