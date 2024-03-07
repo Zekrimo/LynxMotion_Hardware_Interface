@@ -1,0 +1,29 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/son/ros2-WS/install/lynxarm_interface/include/**",
+        "/home/son/ros2-WS/install/tutorial_interfaces/include/**",
+        "/opt/ros/humble/include/**",
+        "/home/son/ros2-WS/src/cpp_pubsub/include/**",
+        "/home/son/ros2-WS/src/cpp_srvcli/include/**",
+        "/home/son/ros2-WS/src/lynxarm_interface/include/**",
+        "/home/son/ros2-WS/src/lynxarm_srvcli/include/**",
+        "/home/son/ros2-WS/src/more_interfaces/include/**",
+        "/home/son/ros2-WS/src/my_package/include/**",
+        "/home/son/ros2-WS/src/tutorial_interfaces/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

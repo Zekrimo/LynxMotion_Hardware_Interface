@@ -1,0 +1,41 @@
+@startuml
+
+package "lynxarm_srvcli" {
+    [rclcpp]
+    [rclcpp::Node]
+    [rclcpp::Client]
+    [rclcpp::Service]
+  
+    [LowLevelDriver]
+    [HighLevelDriver]
+
+    [SetArmPosition_server]
+}
+
+package "lynxarm_interface" {
+
+    [lynxarm_interface/srv/SetArmPosition]
+
+}
+
+package "Boost Asio" {
+    [boost::asio::io_service]
+    [boost::asio::serial_port]
+}
+
+[LowLevelDriver] -left-> [boost::asio::io_service]
+[LowLevelDriver] -left-> [boost::asio::serial_port]
+
+[HighLevelDriver] -down-> [LowLevelDriver]
+
+[rclcpp::Node] -up-> [rclcpp]
+[rclcpp::Client] -up-> [rclcpp]
+[rclcpp::Service] -up-> [rclcpp]
+
+[HighLevelDriver] -right-> [rclcpp::Service]
+[HighLevelDriver] -down-> [SetArmPosition_server]
+
+[lynxarm_interface/srv/SetArmPosition] <-up- [SetArmPosition_server]
+
+@enduml
+

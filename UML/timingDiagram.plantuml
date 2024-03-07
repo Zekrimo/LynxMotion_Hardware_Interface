@@ -1,0 +1,22 @@
+@startuml
+concise   "userClient"    as CL
+concise   "HighLevelDriverServer"       as HL
+concise  "LowLeverDriver"              as LL
+clock "Arduino"       as A0 with period 50
+
+
+
+@0
+CL is Idle
+HL is Idle
+LL is Idle
+A0 is Idle
+
+@100
+CL is Waiting
+HL is Waiting
+LL is Processing
+A0 is Idle
+
+
+@enduml
