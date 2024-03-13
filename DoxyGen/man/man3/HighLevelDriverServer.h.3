@@ -1,0 +1,89 @@
+.TH "C:/Users/sonny/Desktop/tmpo/lynxarm_srvcli/src/HighLevelDriverServer.h" 3 "Version 1" "LynxMotion AL5D Hardware Interface" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+C:/Users/sonny/Desktop/tmpo/lynxarm_srvcli/src/HighLevelDriverServer.h \- Header file for the \fBLynxarmHLD\fP class\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fR#include 'rclcpp/rclcpp\&.hpp'\fP
+.br
+\fR#include 'rclcpp_action/rclcpp_action\&.hpp'\fP
+.br
+\fR#include 'lynxarm_interface/srv/set_servo_position\&.hpp'\fP
+.br
+\fR#include 'lynxarm_interface/action/predefined_command_action\&.hpp'\fP
+.br
+\fR#include 'lynxarm_interface/action/single_servo_command\&.hpp'\fP
+.br
+\fR#include 'LowLevelDriver\&.cpp'\fP
+.br
+\fR#include 'Configuration\&.hpp'\fP
+.br
+\fR#include <memory>\fP
+.br
+
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBLynxarmHLD\fP"
+.br
+.RI "A class representing the high-level driver for the Lynxarm robot arm\&. "
+.in -1c
+.SS "Enumerations"
+
+.in +1c
+.ti -1c
+.RI "enum \fBpredefined_positions\fP { \fBPARK\fP = 0, \fBREADY\fP = 1, \fBSTRAIGHTUP\fP = 2 }"
+.br
+.RI "Enumeration of predefined positions\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Header file for the \fBLynxarmHLD\fP class\&. 
+
+This file contains the declaration of the \fBLynxarmHLD\fP class, which represents the high-level driver for the Lynxarm robot arm\&. The class provides high-level control functions for the Lynxarm robot arm, including sending commands to move the servos to specified positions, sending predefined commands, initializing the Lynxarm, and handling goal requests and cancellations for predefined command actions\&.
+.PP
+\fBAuthor\fP
+.RS 4
+Sonny Selten 
+.PP
+Elviana 
+.RE
+.PP
+\fBVersion\fP
+.RS 4
+1\&.0 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2024-03-07 
+.br
+ 
+.RE
+.PP
+
+.SH "Enumeration Type Documentation"
+.PP 
+.SS "enum \fBpredefined_positions\fP"
+
+.PP
+Enumeration of predefined positions\&. 
+.PP
+\fBEnumerator\fP
+.in +1c
+.TP
+\fB\fIPARK \fP\fP
+Park position 
+.TP
+\fB\fIREADY \fP\fP
+Rest position 
+.TP
+\fB\fISTRAIGHTUP \fP\fP
+Straight up position 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LynxMotion AL5D Hardware Interface from the source code\&.

@@ -14,6 +14,7 @@ find_package(rosidl_default_generators REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
   "srv/SetArmPosition.srv"
   "srv/SetServoPosition.srv"
+  "srv/Stop.srv"
   "action/PredefinedCommandAction.action"
   "action/SingleServoCommand.action"
 )

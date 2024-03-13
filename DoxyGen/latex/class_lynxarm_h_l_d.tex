@@ -1,0 +1,161 @@
+\doxysection{Lynxarm\+HLD Class Reference}
+\hypertarget{class_lynxarm_h_l_d}{}\label{class_lynxarm_h_l_d}\index{LynxarmHLD@{LynxarmHLD}}
+
+
+A class representing the high-\/level driver for the Lynxarm robot arm.  
+
+
+
+
+{\ttfamily \#include $<$High\+Level\+Driver\+Server.\+h$>$}
+
+Inheritance diagram for Lynxarm\+HLD\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_lynxarm_h_l_d}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_lynxarm_h_l_d_a6fc7c0f386c609a44aebd10787dda850}\label{class_lynxarm_h_l_d_a6fc7c0f386c609a44aebd10787dda850} 
+using {\bfseries Lynx\+\_\+\+Command} = lynxarm\+\_\+interface\+::action\+::\+Predefined\+Command\+Action
+\begin{DoxyCompactList}\small\item\em Alias for the Lynx\+\_\+\+Command action type. \end{DoxyCompactList}\item 
+\Hypertarget{class_lynxarm_h_l_d_af102e86684b1a2bed621d7336cd21b4c}\label{class_lynxarm_h_l_d_af102e86684b1a2bed621d7336cd21b4c} 
+using {\bfseries Servo\+\_\+\+Command} = lynxarm\+\_\+interface\+::action\+::\+Single\+Servo\+Command
+\begin{DoxyCompactList}\small\item\em Alias for the lynxarm\+\_\+interface\+::action\+::\+Single\+Servo\+Command action type. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{class_lynxarm_h_l_d_ab542e4afbf32fc40bc826c7c07564115}{Goal\+Handle}} = rclcpp\+\_\+action\+::\+Server\+Goal\+Handle$<$\mbox{\hyperlink{class_lynxarm_h_l_d_a6fc7c0f386c609a44aebd10787dda850}{Lynx\+\_\+\+Command}}$>$
+\begin{DoxyCompactList}\small\item\em Alias for the goal handle type used in the server. \end{DoxyCompactList}\item 
+\Hypertarget{class_lynxarm_h_l_d_a5ff936582bfdff40fb6a6bd611ebe62b}\label{class_lynxarm_h_l_d_a5ff936582bfdff40fb6a6bd611ebe62b} 
+using {\bfseries Goal\+Handle\+Servo} = rclcpp\+\_\+action\+::\+Server\+Goal\+Handle$<$\mbox{\hyperlink{class_lynxarm_h_l_d_af102e86684b1a2bed621d7336cd21b4c}{Servo\+\_\+\+Command}}$>$
+\begin{DoxyCompactList}\small\item\em Alias for the server goal handle type used for the Servo\+\_\+\+Command action. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_lynxarm_h_l_d_a9aa5e0f0b69202d251cb89300e39f290}{Lynxarm\+HLD}} (const rclcpp\+::\+Node\+Options \&options=rclcpp\+::\+Node\+Options())
+\begin{DoxyCompactList}\small\item\em Class representing the Lynxarm High-\/\+Level Driver. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lynxarm_h_l_d_a184f12dfdcded53ab3eee6a61cb7aae4}{send\+Single\+Servo\+To\+Position}} (uint8\+\_\+t channel, int64\+\_\+t degrees, uint64\+\_\+t time, int speed=1)
+\begin{DoxyCompactList}\small\item\em Sends a single servo to a specified position. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lynxarm_h_l_d_a38019f5ab3a0723b564881c065ed6648}{send\+To\+Predefined\+Position}} (std\+::string command)
+\begin{DoxyCompactList}\small\item\em Sends a command to move the robot arm to a predefined position. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lynxarm_h_l_d_afdaee8dc85f1560497ed73bf91f87e8f}{send\+Predefined\+Position}} (\mbox{\hyperlink{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5}{predefined\+\_\+positions}} position)
+\begin{DoxyCompactList}\small\item\em Sends a predefined position to the low-\/level driver. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_lynxarm_h_l_d_a21d7b5b9cb165c6f778ad02dbb817a83}{init\+Lynxarm}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the Lynxarm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A class representing the high-\/level driver for the Lynxarm robot arm. 
+
+This class provides high-\/level control functions for the Lynxarm robot arm. It handles sending commands to move the servos to specified positions, sending predefined commands, and initializing the Lynxarm. It also handles goal requests and cancellations for predefined command actions. 
+
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{class_lynxarm_h_l_d_ab542e4afbf32fc40bc826c7c07564115}\label{class_lynxarm_h_l_d_ab542e4afbf32fc40bc826c7c07564115} 
+\index{LynxarmHLD@{LynxarmHLD}!GoalHandle@{GoalHandle}}
+\index{GoalHandle@{GoalHandle}!LynxarmHLD@{LynxarmHLD}}
+\doxysubsubsection{\texorpdfstring{GoalHandle}{GoalHandle}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{class_lynxarm_h_l_d_ab542e4afbf32fc40bc826c7c07564115}{Lynxarm\+HLD\+::\+Goal\+Handle}} = rclcpp\+\_\+action\+::\+Server\+Goal\+Handle$<$\mbox{\hyperlink{class_lynxarm_h_l_d_a6fc7c0f386c609a44aebd10787dda850}{Lynx\+\_\+\+Command}}$>$}
+
+
+
+Alias for the goal handle type used in the server. 
+
+This type represents a handle to a goal in the server. It is used to track the status and progress of a goal. The goal handle is templated on the action message type. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_lynxarm_h_l_d_a9aa5e0f0b69202d251cb89300e39f290}\label{class_lynxarm_h_l_d_a9aa5e0f0b69202d251cb89300e39f290} 
+\index{LynxarmHLD@{LynxarmHLD}!LynxarmHLD@{LynxarmHLD}}
+\index{LynxarmHLD@{LynxarmHLD}!LynxarmHLD@{LynxarmHLD}}
+\doxysubsubsection{\texorpdfstring{LynxarmHLD()}{LynxarmHLD()}}
+{\footnotesize\ttfamily Lynxarm\+HLD\+::\+Lynxarm\+HLD (\begin{DoxyParamCaption}\item[{const rclcpp\+::\+Node\+Options \&}]{options = {\ttfamily rclcpp\+:\+:NodeOptions()} }\end{DoxyParamCaption})}
+
+
+
+Class representing the Lynxarm High-\/\+Level Driver. 
+
+This class provides the functionality for controlling the Lynxarm robot using high-\/level commands. It is used as a server for handling service requests from clients. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_lynxarm_h_l_d_a21d7b5b9cb165c6f778ad02dbb817a83}\label{class_lynxarm_h_l_d_a21d7b5b9cb165c6f778ad02dbb817a83} 
+\index{LynxarmHLD@{LynxarmHLD}!initLynxarm@{initLynxarm}}
+\index{initLynxarm@{initLynxarm}!LynxarmHLD@{LynxarmHLD}}
+\doxysubsubsection{\texorpdfstring{initLynxarm()}{initLynxarm()}}
+{\footnotesize\ttfamily bool Lynxarm\+HLD\+::init\+Lynxarm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Initializes the Lynxarm. 
+
+This function initializes the Lynxarm and returns a boolean value indicating whether the initialization was successful or not.
+
+\begin{DoxyReturn}{Returns}
+true if the Lynxarm is successfully initialized, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_lynxarm_h_l_d_afdaee8dc85f1560497ed73bf91f87e8f}\label{class_lynxarm_h_l_d_afdaee8dc85f1560497ed73bf91f87e8f} 
+\index{LynxarmHLD@{LynxarmHLD}!sendPredefinedPosition@{sendPredefinedPosition}}
+\index{sendPredefinedPosition@{sendPredefinedPosition}!LynxarmHLD@{LynxarmHLD}}
+\doxysubsubsection{\texorpdfstring{sendPredefinedPosition()}{sendPredefinedPosition()}}
+{\footnotesize\ttfamily bool Lynxarm\+HLD\+::send\+Predefined\+Position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5}{predefined\+\_\+positions}}}]{position }\end{DoxyParamCaption})}
+
+
+
+Sends a predefined position to the low-\/level driver. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The predefined position to be sent. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the position was successfully sent, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_lynxarm_h_l_d_a184f12dfdcded53ab3eee6a61cb7aae4}\label{class_lynxarm_h_l_d_a184f12dfdcded53ab3eee6a61cb7aae4} 
+\index{LynxarmHLD@{LynxarmHLD}!sendSingleServoToPosition@{sendSingleServoToPosition}}
+\index{sendSingleServoToPosition@{sendSingleServoToPosition}!LynxarmHLD@{LynxarmHLD}}
+\doxysubsubsection{\texorpdfstring{sendSingleServoToPosition()}{sendSingleServoToPosition()}}
+{\footnotesize\ttfamily bool Lynxarm\+HLD\+::send\+Single\+Servo\+To\+Position (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{channel,  }\item[{int64\+\_\+t}]{degrees,  }\item[{uint64\+\_\+t}]{time,  }\item[{int}]{speed = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+
+
+Sends a single servo to a specified position. 
+
+This function sends a command to move a single servo to a specified position. The servo is identified by the channel parameter, and the position is specified in degrees. The time parameter determines the duration of the movement, and the speed parameter controls the speed of the movement.
+
+
+\begin{DoxyParams}{Parameters}
+{\em channel} & The channel of the servo to be moved. \\
+\hline
+{\em degrees} & The position to which the servo should be moved, in degrees. \\
+\hline
+{\em time} & The duration of the movement, in milliseconds. \\
+\hline
+{\em speed} & The speed of the movement. Default value is 1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was successfully sent, false otherwise. 
+\end{DoxyReturn}
+if action is used for single servo only then\Hypertarget{class_lynxarm_h_l_d_a38019f5ab3a0723b564881c065ed6648}\label{class_lynxarm_h_l_d_a38019f5ab3a0723b564881c065ed6648} 
+\index{LynxarmHLD@{LynxarmHLD}!sendToPredefinedPosition@{sendToPredefinedPosition}}
+\index{sendToPredefinedPosition@{sendToPredefinedPosition}!LynxarmHLD@{LynxarmHLD}}
+\doxysubsubsection{\texorpdfstring{sendToPredefinedPosition()}{sendToPredefinedPosition()}}
+{\footnotesize\ttfamily bool Lynxarm\+HLD\+::send\+To\+Predefined\+Position (\begin{DoxyParamCaption}\item[{std\+::string}]{command }\end{DoxyParamCaption})}
+
+
+
+Sends a command to move the robot arm to a predefined position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The command to be sent. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was successfully sent, false otherwise. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/sonny/\+Desktop/tmpo/lynxarm\+\_\+srvcli/src/\mbox{\hyperlink{_high_level_driver_server_8h}{High\+Level\+Driver\+Server.\+h}}\item 
+C\+:/\+Users/sonny/\+Desktop/tmpo/lynxarm\+\_\+srvcli/src/High\+Level\+Driver\+Server.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,41 @@
+.TH "md__c_1_2_users_2sonny_2_desktop_2tmpo_2_r_e_a_d_m_e" 3 "Version 1" "LynxMotion AL5D Hardware Interface" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+md__c_1_2_users_2sonny_2_desktop_2tmpo_2_r_e_a_d_m_e \- README 
+.PP
+World beroepsproduct robotarm interface
+.SH "LynxMotion_Hardware_Interface"
+.PP
+lynxmotion_ssc_32u Controller
+.SH "Requirements"
+.PP
+Servo Control (SA01-SA04): (implemented)* Develop ROS nodes to control each degree of freedom of the robotic arm using servo motors\&. Ensure the ability to move servos to specified positions and adjust movement speed as required\&. (implemented)* Implement logic to account for differences in arm configurations, such as variations in servo orientations\&.
+.PP
+Predefined Positions (PO01-PO03): (implemented)* Define predefined positions for the arm, such as Park, Ready, and Straight up\&. Develop ROS services or actions to move the arm to these positions upon request\&.
+.PP
+Safety Features (VE01-VE03): (implemented)* Implement emergency stop functionality to halt arm movement immediately in case of emergencies\&. (implemented)* Enforce limits on servo motion to ensure it stays within safe ranges\&. (implemented)* Ensure the arm initializes safely upon startup, moving to a predefined safe position\&.
+.PP
+Operational Information (INF01-INF03): (implemented)* Provide operational information via ROS logging mechanisms at appropriate log levels (INFO, DEBUG, WARNING)\&. Include state information, event notifications, and warnings for delayed actions\&.
+.PP
+Queueing of Commands (EX01): (not implemented)* Implement a command queue to manage multiple commands, allowing for queuing, dequeuing, and clearing of commands\&. Ensure the queue is emptied during emergency stops\&.
+.PP
+Documentation (SY01-SY04):
+.IP "\(bu" 2
+Document the system design, including use cases, subsystem decomposition, component diagrams, system behavior using state diagrams, and interfaces\&. (implemented)* Provide detailed documentation for the ROS nodes, services, and actions developed, including API documentation generated with Doxygen\&.
+.PP
+.PP
+System Description (SY01-SY04):
+.IP "\(bu" 2
+Describe the system architecture, interfaces, and ports using component diagrams\&.
+.IP "\(bu" 2
+Use state diagrams to illustrate the system behavior in different states and transitions\&.
+.PP
+.PP
+Demonstration (DE01-DE02):
+.IP "\(bu" 2
+Develop a demo application that showcases the functionality of the software interface\&. (implemented)* Demonstrate the ability to initialize the arm, move it to predefined positions, execute sequential movements, trigger emergency stops, and return to a safe position\&.
+.IP "\(bu" 2
+Clearly present and validate the achieved Quality of Service (QoS) during the demonstration\&. 
+.PP
+

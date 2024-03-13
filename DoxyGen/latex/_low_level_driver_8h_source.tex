@@ -1,0 +1,53 @@
+\doxysection{Low\+Level\+Driver.\+h}
+\hypertarget{_low_level_driver_8h_source}{}\label{_low_level_driver_8h_source}\index{C:/Users/sonny/Desktop/tmpo/lynxarm\_srvcli/src/LowLevelDriver.h@{C:/Users/sonny/Desktop/tmpo/lynxarm\_srvcli/src/LowLevelDriver.h}}
+\mbox{\hyperlink{_low_level_driver_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#ifndef\ LOW\_LEVEL\_DRIVER\_H}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ LOW\_LEVEL\_DRIVER\_H}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <iostream>}\ \ \ \ \ \ \ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <string>}\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Provides\ a\ string\ class.}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <queue>}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Provides\ a\ queue\ data\ structure.}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <boost/asio.hpp>}\ \ \ \ \ \textcolor{comment}{//\ Provides\ a\ cross-\/platform\ framework\ for\ asynchronous\ I/O\ operations.}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}Configuration.hpp"{}}\ \ \textcolor{comment}{//\ Contains\ the\ configuration\ parameters\ for\ the\ low-\/level\ driver.}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_low_level_driver}{LowLevelDriver}}}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00043\ \ \ \mbox{\hyperlink{class_low_level_driver_acea1809582ef5a91afcb0c33dd62af17}{LowLevelDriver}}(\textcolor{keyword}{const}\ std::string\ \&port\_name,\ uint32\_t\ baud\_rate);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \ \ \mbox{\hyperlink{class_low_level_driver_af1b9b880c4d008161454d875f2b80d2e}{\string~LowLevelDriver}}();}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00059\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_low_level_driver_a18b37914840afd55b53736023397d3e3}{sendSerialMessage}}(std::string\ command);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00073\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_low_level_driver_a15adf2fd951a935dd7f6311f5a4217d7}{sendServoPositionData}}(\textcolor{keywordtype}{int}\ servo\_channel,\ \textcolor{keywordtype}{int}\ pulse\_width,\ \textcolor{keywordtype}{int}\ speed\ =\ 0,\ \textcolor{keywordtype}{int}\ time\ =\ 0);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00084\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_low_level_driver_ac0bb3002c1495f4fa0a90fa26abbd898}{setServoPositionOffset}}(\textcolor{keywordtype}{int}\ servo\_channel,\ \textcolor{keywordtype}{int}\ offset\_value);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00097\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_low_level_driver_abd228c3e31b4cf76da3d3589deabaa45}{queueCommand}}(\textcolor{keywordtype}{int}\ servo\_channel,\ \textcolor{keywordtype}{int}\ pulse\_width,\ \textcolor{keywordtype}{int}\ speed\ =\ 0,\ \textcolor{keywordtype}{int}\ time\ =\ 0);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00106\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_low_level_driver_a8dba0d320d996c3b4e19870921c47f32}{sendQueuedCommands}}();}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00111\ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_low_level_driver_a05425f80445bf44c8eb28172531d6264}{clearCommand}}();}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00120\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_low_level_driver_a7ac0c061618a329d3ac85f829be9dd1d}{processCommandQueue}}();}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00127\ \ \ std::string\ \mbox{\hyperlink{class_low_level_driver_a6dfc0f09b01308d3e746b320d30ef1da}{getCommand}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00134\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_low_level_driver_a839439847319c2dec67f53e44593f3ef}{emergencyStop}}();}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00140\ \ \ boost::asio::io\_service\ ioservice;}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00149\ \ \ boost::asio::serial\_port\ serial;\ }
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00154\ \ \ std::string\ command\ =\ \textcolor{stringliteral}{"{}"{}};\ }
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00162\ \ \ std::queue<std::string>\ commandQueue;}
+\DoxyCodeLine{00163\ \};}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ LOW\_LEVEL\_DRIVER\_H}}
+
+\end{DoxyCode}

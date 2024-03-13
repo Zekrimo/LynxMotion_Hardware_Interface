@@ -1,0 +1,213 @@
+\doxysection{Low\+Level\+Driver.\+cpp}
+\hypertarget{_low_level_driver_8cpp_source}{}\label{_low_level_driver_8cpp_source}\index{C:/Users/sonny/Desktop/tmpo/lynxarm\_srvcli/src/LowLevelDriver.cpp@{C:/Users/sonny/Desktop/tmpo/lynxarm\_srvcli/src/LowLevelDriver.cpp}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_low_level_driver_8h}{LowLevelDriver.h}}"{}}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \mbox{\hyperlink{class_low_level_driver_acea1809582ef5a91afcb0c33dd62af17}{LowLevelDriver::LowLevelDriver}}(\textcolor{keyword}{const}\ std::string\ \&port\_name,\ uint32\_t\ baud\_rate)}
+\DoxyCodeLine{00004\ \ \ \ \ :\ serial(ioservice,\ port\_name)\ \textcolor{comment}{//\ Port\ name\ parameter\ needs\ integration\ with\ HighLevelDriver}}
+\DoxyCodeLine{00005\ \{}
+\DoxyCodeLine{00006\ \ \ \textcolor{comment}{//\ Set\ serial\ port\ options\ such\ as\ baud\ rate,\ flow\ control,\ parity,\ stop\ bits,\ and\ character\ size}}
+\DoxyCodeLine{00007\ \ \ serial.set\_option(boost::asio::serial\_port\_base::baud\_rate(baud\_rate));\ \textcolor{comment}{//\ Baud\ rate\ parameter\ needs\ integration\ with\ HighLevelDriver}}
+\DoxyCodeLine{00008\ \ \ serial.set\_option(}
+\DoxyCodeLine{00009\ \ \ \ \ \ \ boost::asio::serial\_port::flow\_control(}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ \ \ boost::asio::serial\_port::flow\_control\ ::none));}
+\DoxyCodeLine{00011\ \ \ serial.set\_option(boost::asio::serial\_port::parity(boost::asio::serial\_port::parity::none));}
+\DoxyCodeLine{00012\ \ \ serial.set\_option(boost::asio::serial\_port::stop\_bits(boost::asio::serial\_port::stop\_bits::one));}
+\DoxyCodeLine{00013\ \ \ serial.set\_option(}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ boost::asio::serial\_port::character\_size(}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \ \ boost::asio::serial\_port::}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ character\_size(8)));}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \textcolor{keywordflow}{if}\ (!serial.is\_open())}
+\DoxyCodeLine{00019\ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Serial\ port\ is\ not\ open."{}}\ <<\ std::endl;}
+\DoxyCodeLine{00021\ \ \ \}}
+\DoxyCodeLine{00022\ \}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ Destructor:\ Closes\ the\ serial\ port\ if\ it's\ open}}
+\DoxyCodeLine{00025\ \mbox{\hyperlink{class_low_level_driver_af1b9b880c4d008161454d875f2b80d2e}{LowLevelDriver::\string~LowLevelDriver}}()}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \ \ command\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00028\ \ \ \mbox{\hyperlink{class_low_level_driver_a839439847319c2dec67f53e44593f3ef}{emergencyStop}}();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \textcolor{keywordflow}{if}\ (serial.is\_open())}
+\DoxyCodeLine{00031\ \ \ \{}
+\DoxyCodeLine{00032\ \ \ \ \ serial.close();}
+\DoxyCodeLine{00033\ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \textcolor{keywordflow}{while}\ (!commandQueue.empty())}
+\DoxyCodeLine{00036\ \ \ \{}
+\DoxyCodeLine{00037\ \ \ \ \ commandQueue.pop();}
+\DoxyCodeLine{00038\ \ \ \}}
+\DoxyCodeLine{00039\ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_low_level_driver_a18b37914840afd55b53736023397d3e3}{LowLevelDriver::sendSerialMessage}}(std::string\ command)}
+\DoxyCodeLine{00042\ \{}
+\DoxyCodeLine{00043\ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00044\ \ \ \{}
+\DoxyCodeLine{00045\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ sending\ serial\ message:\ "{}}\ <<\ command\ <<\ \textcolor{stringliteral}{"{}\ :\ "{}}\ <<\ std::endl;}
+\DoxyCodeLine{00046\ \ \ \ \ serial.write\_some(boost::asio::buffer(command));}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00048\ \ \ \}}
+\DoxyCodeLine{00049\ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\ \&e)}
+\DoxyCodeLine{00050\ \ \ \{}
+\DoxyCodeLine{00051\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Failed\ to\ send\ data\ over\ serial\ port:\ "{}}\ <<\ e.what()\ <<\ std::endl;}
+\DoxyCodeLine{00052\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Serial\ port\ not\ open\ or\ icorrectly\ specified"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00054\ \ \ \}}
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00056\ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_low_level_driver_a15adf2fd951a935dd7f6311f5a4217d7}{LowLevelDriver::sendServoPositionData}}(\textcolor{keywordtype}{int}\ servo\_channel,\ \textcolor{keywordtype}{int}\ pulse\_width,\ \textcolor{keywordtype}{int}\ speed,\ \textcolor{keywordtype}{int}\ time)}
+\DoxyCodeLine{00059\ \{}
+\DoxyCodeLine{00060\ \ \ \textcolor{keywordflow}{if}\ (!serial.is\_open())}
+\DoxyCodeLine{00061\ \ \ \{}
+\DoxyCodeLine{00062\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Serial\ port\ is\ not\ open."{}}\ <<\ std::endl;}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00064\ \ \ \}}
+\DoxyCodeLine{00065\ \ \ std::string\ command\ =\ \textcolor{stringliteral}{"{}\#"{}}\ +\ std::to\_string(servo\_channel)\ +\ \textcolor{stringliteral}{"{}P"{}}\ +\ std::to\_string(pulse\_width);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \textcolor{keywordflow}{if}\ (speed\ !=\ 0)}
+\DoxyCodeLine{00068\ \ \ \{}
+\DoxyCodeLine{00069\ \ \ \ \ command\ +=\ \textcolor{stringliteral}{"{}S"{}}\ +\ std::to\_string(speed);}
+\DoxyCodeLine{00070\ \ \ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \textcolor{keywordflow}{if}\ (time\ !=\ 0)}
+\DoxyCodeLine{00073\ \ \ \{}
+\DoxyCodeLine{00074\ \ \ \ \ command\ +=\ \textcolor{stringliteral}{"{}T"{}}\ +\ std::to\_string(time);}
+\DoxyCodeLine{00075\ \ \ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ command\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)r"{}};\ \textcolor{comment}{//\ Carriage\ return}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ sending\ serial\ message:\ "{}}\ <<\ command\ <<\ \textcolor{stringliteral}{"{}\ :\ "{}}\ <<\ std::endl;}
+\DoxyCodeLine{00080\ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00081\ \ \ \{}
+\DoxyCodeLine{00082\ \ \ \ \ serial.write\_some(boost::asio::buffer(command));}
+\DoxyCodeLine{00083\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}succes"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00085\ \ \ \}}
+\DoxyCodeLine{00086\ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\ \&e)}
+\DoxyCodeLine{00087\ \ \ \{}
+\DoxyCodeLine{00088\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Failed\ to\ send\ data\ over\ serial\ port:\ "{}}\ <<\ e.what()\ <<\ std::endl;}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00090\ \ \ \}}
+\DoxyCodeLine{00091\ \}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_low_level_driver_ac0bb3002c1495f4fa0a90fa26abbd898}{LowLevelDriver::setServoPositionOffset}}(\textcolor{keywordtype}{int}\ servo\_channel,\ \textcolor{keywordtype}{int}\ offset\_value)}
+\DoxyCodeLine{00094\ \{}
+\DoxyCodeLine{00095\ \ \ \textcolor{keywordflow}{if}\ (!serial.is\_open())}
+\DoxyCodeLine{00096\ \ \ \{}
+\DoxyCodeLine{00097\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Serial\ port\ is\ not\ open."{}}\ <<\ std::endl;}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00099\ \ \ \}}
+\DoxyCodeLine{00100\ \ \ \mbox{\hyperlink{class_low_level_driver_a05425f80445bf44c8eb28172531d6264}{clearCommand}}();}
+\DoxyCodeLine{00101\ \ \ command\ +=\ \textcolor{stringliteral}{"{}\#"{}};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \textcolor{keywordflow}{if}\ (servo\_channel\ <\ 0\ ||\ servo\_channel\ >\ 31)}
+\DoxyCodeLine{00104\ \ \ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00106\ \ \ \}}
+\DoxyCodeLine{00107\ \ \ command\ +=\ std::to\_string(servo\_channel);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \textcolor{keywordflow}{if}\ (offset\_value\ <\ -\/100\ ||\ offset\_value\ >\ 100)}
+\DoxyCodeLine{00110\ \ \ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00112\ \ \ \}}
+\DoxyCodeLine{00113\ \ \ command\ +=\ \textcolor{stringliteral}{"{}\ PO"{}}\ +\ std::to\_string(offset\_value);}
+\DoxyCodeLine{00114\ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{class_low_level_driver_a8dba0d320d996c3b4e19870921c47f32}{sendQueuedCommands}}();}
+\DoxyCodeLine{00115\ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_low_level_driver_abd228c3e31b4cf76da3d3589deabaa45}{LowLevelDriver::queueCommand}}(\textcolor{keywordtype}{int}\ servo\_channel,\ \textcolor{keywordtype}{int}\ pulse\_width,\ \textcolor{keywordtype}{int}\ speed,\ \textcolor{keywordtype}{int}\ time)}
+\DoxyCodeLine{00118\ \{}
+\DoxyCodeLine{00119\ \ \ command\ +=\ \textcolor{stringliteral}{"{}\#"{}};}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \textcolor{keywordflow}{if}\ (servo\_channel\ <\ 0\ ||\ servo\_channel\ >\ 31)}
+\DoxyCodeLine{00122\ \ \ \{}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00124\ \ \ \}}
+\DoxyCodeLine{00125\ \ \ command\ +=\ std::to\_string(servo\_channel);}
+\DoxyCodeLine{00126\ \ \ \textcolor{keywordflow}{if}\ (pulse\_width\ <\ 500\ ||\ pulse\_width\ >\ 2500)}
+\DoxyCodeLine{00127\ \ \ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00129\ \ \ \}}
+\DoxyCodeLine{00130\ \ \ command\ +=\ \textcolor{stringliteral}{"{}P"{}}\ +\ std::to\_string(pulse\_width);}
+\DoxyCodeLine{00131\ \ \ \textcolor{keywordflow}{if}\ (speed\ <\ 1)}
+\DoxyCodeLine{00132\ \ \ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00134\ \ \ \}}
+\DoxyCodeLine{00135\ \ \ command\ +=\ \textcolor{stringliteral}{"{}S"{}}\ +\ std::to\_string(speed);}
+\DoxyCodeLine{00136\ \ \ \textcolor{keywordflow}{if}\ (time\ <\ 0\ ||\ time\ >\ 65535)}
+\DoxyCodeLine{00137\ \ \ \{}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00139\ \ \ \}}
+\DoxyCodeLine{00140\ \ \ command\ +=\ \textcolor{stringliteral}{"{}T"{}}\ +\ std::to\_string(time);}
+\DoxyCodeLine{00141\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00142\ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_low_level_driver_a8dba0d320d996c3b4e19870921c47f32}{LowLevelDriver::sendQueuedCommands}}()}
+\DoxyCodeLine{00145\ \{}
+\DoxyCodeLine{00146\ \ \ command\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)r"{}};\ \textcolor{comment}{//\ Carriage\ return}}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \textcolor{comment}{//\ ch\ 0-\/31\ pw\ 500-\/2500\ microseconds\ spd\ 0\ +\ microseconds/s\ ,time\ microseconds\ 0-\/65535,\ cr\ ASCII\ 13}}
+\DoxyCodeLine{00149\ \ \ \textcolor{keywordflow}{if}\ (!serial.is\_open())}
+\DoxyCodeLine{00150\ \ \ \{}
+\DoxyCodeLine{00151\ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}Serial\ port\ is\ not\ open."{}}\ <<\ std::endl;}
+\DoxyCodeLine{00152\ \ \ \ \ \mbox{\hyperlink{class_low_level_driver_a05425f80445bf44c8eb28172531d6264}{clearCommand}}();}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00154\ \ \ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \textcolor{keywordflow}{if}\ (command.length()\ >\ 1)}
+\DoxyCodeLine{00157\ \ \ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{class_low_level_driver_a18b37914840afd55b53736023397d3e3}{sendSerialMessage}}(command))}
+\DoxyCodeLine{00159\ \ \ \ \ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00161\ \ \ \ \ \}}
+\DoxyCodeLine{00162\ \ \ \}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00165\ \}}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_low_level_driver_a05425f80445bf44c8eb28172531d6264}{LowLevelDriver::clearCommand}}()}
+\DoxyCodeLine{00168\ \{}
+\DoxyCodeLine{00169\ \ \ command\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00170\ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00171\ \}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_low_level_driver_a7ac0c061618a329d3ac85f829be9dd1d}{LowLevelDriver::processCommandQueue}}()}
+\DoxyCodeLine{00174\ \{}
+\DoxyCodeLine{00175\ \ \ \textcolor{keywordflow}{while}\ (!commandQueue.empty())}
+\DoxyCodeLine{00176\ \ \ \{}
+\DoxyCodeLine{00177\ \ \ \ \ \mbox{\hyperlink{class_low_level_driver_a18b37914840afd55b53736023397d3e3}{sendSerialMessage}}(commandQueue.front());}
+\DoxyCodeLine{00178\ \ \ \ \ commandQueue.pop();}
+\DoxyCodeLine{00179\ \ \ \}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \ \ \textcolor{keywordflow}{if}\ (commandQueue.empty())}
+\DoxyCodeLine{00182\ \ \ \{}
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00184\ \ \ \}}
+\DoxyCodeLine{00185\ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00186\ \ \ \{}
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00188\ \ \ \}}
+\DoxyCodeLine{00189\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00190\ \}}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ std::string\ \mbox{\hyperlink{class_low_level_driver_a6dfc0f09b01308d3e746b320d30ef1da}{LowLevelDriver::getCommand}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00193\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00194\ \ \ \textcolor{keywordflow}{return}\ command;}
+\DoxyCodeLine{00195\ \}}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_low_level_driver_a839439847319c2dec67f53e44593f3ef}{LowLevelDriver::emergencyStop}}()}
+\DoxyCodeLine{00198\ \{}
+\DoxyCodeLine{00199\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ SERVO\_AMOUNT;\ ++i)}
+\DoxyCodeLine{00200\ \ \ \{}
+\DoxyCodeLine{00201\ \ \ \ \ std::string\ stopCommand\ =\ \textcolor{stringliteral}{"{}STOP"{}};}
+\DoxyCodeLine{00202\ \ \ \ \ stopCommand\ +=\ std::to\_string(i);}
+\DoxyCodeLine{00203\ \ \ \ \ stopCommand\ +=\ \textcolor{stringliteral}{"{}\(\backslash\)r"{}};}
+\DoxyCodeLine{00204\ \ \ \ \ \mbox{\hyperlink{class_low_level_driver_a18b37914840afd55b53736023397d3e3}{sendSerialMessage}}(stopCommand);}
+\DoxyCodeLine{00205\ \ \ \}}
+\DoxyCodeLine{00206\ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00207\ \}}
+
+\end{DoxyCode}

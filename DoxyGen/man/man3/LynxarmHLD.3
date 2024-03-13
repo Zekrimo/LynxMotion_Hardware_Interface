@@ -1,0 +1,145 @@
+.TH "LynxarmHLD" 3 "Version 1" "LynxMotion AL5D Hardware Interface" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+LynxarmHLD \- A class representing the high-level driver for the Lynxarm robot arm\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <HighLevelDriverServer\&.h>\fP
+.PP
+Inherits rclcpp::Node\&.
+.SS "Public Types"
+
+.in +1c
+.ti -1c
+.RI "using \fBLynx_Command\fP = lynxarm_interface::action::PredefinedCommandAction"
+.br
+.RI "Alias for the Lynx_Command action type\&. "
+.ti -1c
+.RI "using \fBServo_Command\fP = lynxarm_interface::action::SingleServoCommand"
+.br
+.RI "Alias for the lynxarm_interface::action::SingleServoCommand action type\&. "
+.ti -1c
+.RI "using \fBGoalHandle\fP = rclcpp_action::ServerGoalHandle<\fBLynx_Command\fP>"
+.br
+.RI "Alias for the goal handle type used in the server\&. "
+.ti -1c
+.RI "using \fBGoalHandleServo\fP = rclcpp_action::ServerGoalHandle<\fBServo_Command\fP>"
+.br
+.RI "Alias for the server goal handle type used for the Servo_Command action\&. "
+.in -1c
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBLynxarmHLD\fP (const rclcpp::NodeOptions &options=rclcpp::NodeOptions())"
+.br
+.RI "Class representing the Lynxarm High-Level Driver\&. "
+.ti -1c
+.RI "bool \fBsendSingleServoToPosition\fP (uint8_t channel, int64_t degrees, uint64_t time, int speed=1)"
+.br
+.RI "Sends a single servo to a specified position\&. "
+.ti -1c
+.RI "bool \fBsendToPredefinedPosition\fP (std::string command)"
+.br
+.RI "Sends a command to move the robot arm to a predefined position\&. "
+.ti -1c
+.RI "bool \fBsendPredefinedPosition\fP (\fBpredefined_positions\fP position)"
+.br
+.RI "Sends a predefined position to the low-level driver\&. "
+.ti -1c
+.RI "bool \fBinitLynxarm\fP ()"
+.br
+.RI "Initializes the Lynxarm\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+A class representing the high-level driver for the Lynxarm robot arm\&. 
+
+This class provides high-level control functions for the Lynxarm robot arm\&. It handles sending commands to move the servos to specified positions, sending predefined commands, and initializing the Lynxarm\&. It also handles goal requests and cancellations for predefined command actions\&. 
+.SH "Member Typedef Documentation"
+.PP 
+.SS "using \fBLynxarmHLD::GoalHandle\fP = rclcpp_action::ServerGoalHandle<\fBLynx_Command\fP>"
+
+.PP
+Alias for the goal handle type used in the server\&. This type represents a handle to a goal in the server\&. It is used to track the status and progress of a goal\&. The goal handle is templated on the action message type\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "LynxarmHLD::LynxarmHLD (const rclcpp::NodeOptions & options = \fRrclcpp::NodeOptions()\fP)"
+
+.PP
+Class representing the Lynxarm High-Level Driver\&. This class provides the functionality for controlling the Lynxarm robot using high-level commands\&. It is used as a server for handling service requests from clients\&. 
+.SH "Member Function Documentation"
+.PP 
+.SS "bool LynxarmHLD::initLynxarm ()"
+
+.PP
+Initializes the Lynxarm\&. This function initializes the Lynxarm and returns a boolean value indicating whether the initialization was successful or not\&.
+.PP
+\fBReturns\fP
+.RS 4
+true if the Lynxarm is successfully initialized, false otherwise\&. 
+.RE
+.PP
+
+.SS "bool LynxarmHLD::sendPredefinedPosition (\fBpredefined_positions\fP position)"
+
+.PP
+Sends a predefined position to the low-level driver\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIposition\fP The predefined position to be sent\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the position was successfully sent, false otherwise\&. 
+.RE
+.PP
+
+.SS "bool LynxarmHLD::sendSingleServoToPosition (uint8_t channel, int64_t degrees, uint64_t time, int speed = \fR1\fP)"
+
+.PP
+Sends a single servo to a specified position\&. This function sends a command to move a single servo to a specified position\&. The servo is identified by the channel parameter, and the position is specified in degrees\&. The time parameter determines the duration of the movement, and the speed parameter controls the speed of the movement\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIchannel\fP The channel of the servo to be moved\&. 
+.br
+\fIdegrees\fP The position to which the servo should be moved, in degrees\&. 
+.br
+\fItime\fP The duration of the movement, in milliseconds\&. 
+.br
+\fIspeed\fP The speed of the movement\&. Default value is 1\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the command was successfully sent, false otherwise\&. 
+.RE
+.PP
+if action is used for single servo only then
+.SS "bool LynxarmHLD::sendToPredefinedPosition (std::string command)"
+
+.PP
+Sends a command to move the robot arm to a predefined position\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIcommand\fP The command to be sent\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the command was successfully sent, false otherwise\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LynxMotion AL5D Hardware Interface from the source code\&.

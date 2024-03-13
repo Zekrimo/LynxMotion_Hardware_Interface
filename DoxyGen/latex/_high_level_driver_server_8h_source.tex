@@ -1,0 +1,96 @@
+\doxysection{High\+Level\+Driver\+Server.\+h}
+\hypertarget{_high_level_driver_server_8h_source}{}\label{_high_level_driver_server_8h_source}\index{C:/Users/sonny/Desktop/tmpo/lynxarm\_srvcli/src/HighLevelDriverServer.h@{C:/Users/sonny/Desktop/tmpo/lynxarm\_srvcli/src/HighLevelDriverServer.h}}
+\mbox{\hyperlink{_high_level_driver_server_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#ifndef\ HIGH\_LEVEL\_DRIVER\_SERVER\_H}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ HIGH\_LEVEL\_DRIVER\_SERVER\_H}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}rclcpp/rclcpp.hpp"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Include\ ROS\ 2\ C++\ client\ library}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}rclcpp\_action/rclcpp\_action.hpp"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Include\ the\ rclcpp\_action\ library}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ "{}lynxarm\_interface/srv/set\_servo\_position.hpp"{}}\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Include\ the\ service\ message\ header\ file}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}lynxarm\_interface/action/predefined\_command\_action.hpp"{}}\ \textcolor{comment}{//\ Include\ the\ action\ message\ header\ file}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}lynxarm\_interface/action/single\_servo\_command.hpp"{}}\ \ \ \ \ \ \textcolor{comment}{//\ Include\ the\ action\ message\ header\ file}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}LowLevelDriver.cpp"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Include\ the\ LowLevelDriver\ class\ header\ file}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}Configuration.hpp"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Include\ the\ Configuration\ class\ header\ file}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#include\ <memory>}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Include\ the\ <memory>\ header\ for\ smart\ pointers}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5}{predefined\_positions}}}
+\DoxyCodeLine{00033\ \{}
+\DoxyCodeLine{00034\ \ \ \mbox{\hyperlink{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5ad22433eb60c8f12c80d3f45d02709b7b}{PARK}}\ =\ 0,\ \ \ \ \ \ \ }
+\DoxyCodeLine{00035\ \ \ \mbox{\hyperlink{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5a6564f2f3e15be06b670547bbcaaf0798}{READY}}\ =\ 1,\ \ \ \ \ \ }
+\DoxyCodeLine{00036\ \ \ \mbox{\hyperlink{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5ae381559df278f37419e1d3a0ad88b4b2}{STRAIGHTUP}}\ =\ 2\ \ }
+\DoxyCodeLine{00037\ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_lynxarm_h_l_d}{LynxarmHLD}}\ :\ \textcolor{keyword}{public}\ rclcpp::Node}
+\DoxyCodeLine{00050\ \{}
+\DoxyCodeLine{00051\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00055\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{class_lynxarm_h_l_d_a6fc7c0f386c609a44aebd10787dda850}{Lynx\_Command}}\ =\ lynxarm\_interface::action::PredefinedCommandAction;\ \ \ }
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00060\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{class_lynxarm_h_l_d_af102e86684b1a2bed621d7336cd21b4c}{Servo\_Command}}\ =\ lynxarm\_interface::action::SingleServoCommand;}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00068\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{class_lynxarm_h_l_d_ab542e4afbf32fc40bc826c7c07564115}{GoalHandle}}\ =\ rclcpp\_action::ServerGoalHandle<Lynx\_Command>;}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00073\ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{class_lynxarm_h_l_d_a5ff936582bfdff40fb6a6bd611ebe62b}{GoalHandleServo}}\ =\ rclcpp\_action::ServerGoalHandle<Servo\_Command>;}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00081\ \ \ \mbox{\hyperlink{class_lynxarm_h_l_d_a9aa5e0f0b69202d251cb89300e39f290}{LynxarmHLD}}(\textcolor{keyword}{const}\ rclcpp::NodeOptions\ \&\ options\ =\ rclcpp::NodeOptions());}
+\DoxyCodeLine{00082\ \ \ }
+\DoxyCodeLine{00083\ \ \ \mbox{\hyperlink{class_lynxarm_h_l_d}{\string~LynxarmHLD}}();}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00099\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_lynxarm_h_l_d_a184f12dfdcded53ab3eee6a61cb7aae4}{sendSingleServoToPosition}}(uint8\_t\ channel,\ int64\_t\ degrees,\ uint64\_t\ time,\ \textcolor{keywordtype}{int}\ speed\ =\ 1);\ \textcolor{comment}{//in\ degrees}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00107\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_lynxarm_h_l_d_a38019f5ab3a0723b564881c065ed6648}{sendToPredefinedPosition}}(std::string\ command);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00115\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_lynxarm_h_l_d_afdaee8dc85f1560497ed73bf91f87e8f}{sendPredefinedPosition}}(\mbox{\hyperlink{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5}{predefined\_positions}}\ position);}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ }
+\DoxyCodeLine{00126\ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_lynxarm_h_l_d_a21d7b5b9cb165c6f778ad02dbb817a83}{initLynxarm}}();}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00132\ \ \ rclcpp\_action::Server<lynxarm\_interface::action::PredefinedCommandAction>::SharedPtr\ action\_server\_;}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00137\ \ \ rclcpp\_action::Server<lynxarm\_interface::action::SingleServoCommand>::SharedPtr\ action\_server\_servo\_;}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00142\ \ \ rclcpp::Service<lynxarm\_interface::srv::SetServoPosition>::SharedPtr\ service\_;}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00147\ \ \ int64\_t\ max\_time\_\ =\ 1000000;}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00153\ \ \ \textcolor{keyword}{const}\ std::string\ serialPort;}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00158\ \ \ \textcolor{keyword}{const}\ uint64\_t\ baudRate;}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00166\ \ \ \mbox{\hyperlink{class_low_level_driver}{LowLevelDriver}}\ lowLevelDriver;}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00177\ \ \ rclcpp\_action::GoalResponse\ handle\_goal(\ \textcolor{keyword}{const}\ rclcpp\_action::GoalUUID\ \&\ uuid,\ std::shared\_ptr<const\ lynxarm\_interface::action::PredefinedCommandAction::Goal>\ goal);}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00190\ \ \ \ rclcpp\_action::GoalResponse\ handle\_servo\_goal(\ \textcolor{keyword}{const}\ rclcpp\_action::GoalUUID\ \&\ uuid,\ std::shared\_ptr<const\ lynxarm\_interface::action::SingleServoCommand::Goal>\ goal);}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00200\ \ \ rclcpp\_action::CancelResponse\ handle\_cancel(\ \textcolor{keyword}{const}\ std::shared\_ptr<GoalHandle>\ goal\_handle);}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00210\ \ \ rclcpp\_action::CancelResponse\ handle\_servo\_cancel(\ \textcolor{keyword}{const}\ std::shared\_ptr<GoalHandleServo>\ goal\_handle);}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00220\ \ \ \textcolor{keywordtype}{void}\ handle\_accepted(\textcolor{keyword}{const}\ std::shared\_ptr<GoalHandle>\ goal\_handle);}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00230\ \ \ \textcolor{keywordtype}{void}\ handle\_servo\_accepted(\textcolor{keyword}{const}\ std::shared\_ptr<GoalHandleServo>\ goal\_handle);}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00237\ \ \ \textcolor{keywordtype}{void}\ execute(\textcolor{keyword}{const}\ std::shared\_ptr<GoalHandle>\ goal\_handle);}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00246\ \ \ \textcolor{keywordtype}{void}\ execute\_servo(\textcolor{keyword}{const}\ std::shared\_ptr<GoalHandleServo>\ goal\_handle);}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00254\ \ \ \textcolor{keywordtype}{int}\ convertToDegrees(\textcolor{keywordtype}{int}\ pwm);}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00264\ \ \ \textcolor{keywordtype}{int}\ convertToPWM(\textcolor{keywordtype}{int}\ degrees);}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00274\ \ \ int64\_t\ convertToSafePWM(int64\_t\ value,\ int64\_t\ minRange,\ int64\_t\ maxRange);}
+\DoxyCodeLine{00275\ \ \ }
+\DoxyCodeLine{00284\ \ \ \textcolor{keywordtype}{void}\ setServoPosition(\ \textcolor{keyword}{const}\ std::shared\_ptr<lynxarm\_interface::srv::SetServoPosition::Request>\ request,\ std::shared\_ptr<lynxarm\_interface::srv::SetServoPosition::Response>\ response);}
+\DoxyCodeLine{00285\ \};}
+\DoxyCodeLine{00286\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ HIGH\_LEVEL\_DRIVER\_SERVER\_H}}
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00289\ }
+
+\end{DoxyCode}

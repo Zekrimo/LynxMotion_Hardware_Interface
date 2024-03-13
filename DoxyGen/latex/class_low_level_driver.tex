@@ -1,0 +1,222 @@
+\doxysection{Low\+Level\+Driver Class Reference}
+\hypertarget{class_low_level_driver}{}\label{class_low_level_driver}\index{LowLevelDriver@{LowLevelDriver}}
+
+
+Represents a low-\/level driver for communication with a robot arm.  
+
+
+
+
+{\ttfamily \#include $<$Low\+Level\+Driver.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_low_level_driver_acea1809582ef5a91afcb0c33dd62af17}{Low\+Level\+Driver}} (const std\+::string \&port\+\_\+name, uint32\+\_\+t baud\+\_\+rate)
+\begin{DoxyCompactList}\small\item\em Initialize the \doxylink{class_low_level_driver}{Low\+Level\+Driver} object with the specified parameters. \end{DoxyCompactList}\item 
+\Hypertarget{class_low_level_driver_af1b9b880c4d008161454d875f2b80d2e}\label{class_low_level_driver_af1b9b880c4d008161454d875f2b80d2e} 
+{\bfseries \texorpdfstring{$\sim$}{\string~}\+Low\+Level\+Driver} ()
+\begin{DoxyCompactList}\small\item\em Destructor. Closes the serial port if it\textquotesingle{}s open. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_low_level_driver_a18b37914840afd55b53736023397d3e3}{send\+Serial\+Message}} (std\+::string command)
+\begin{DoxyCompactList}\small\item\em Sends a serial message to the low-\/level driver. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_low_level_driver_a15adf2fd951a935dd7f6311f5a4217d7}{send\+Servo\+Position\+Data}} (int servo\+\_\+channel, int pulse\+\_\+width, int speed=0, int time=0)
+\begin{DoxyCompactList}\small\item\em Sends servo position data to the specified servo channel. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_low_level_driver_ac0bb3002c1495f4fa0a90fa26abbd898}{set\+Servo\+Position\+Offset}} (int servo\+\_\+channel, int offset\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Sets the position offset for a servo channel. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_low_level_driver_abd228c3e31b4cf76da3d3589deabaa45}{queue\+Command}} (int servo\+\_\+channel, int pulse\+\_\+width, int speed=0, int time=0)
+\begin{DoxyCompactList}\small\item\em Queues a command to control a servo channel. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_low_level_driver_a8dba0d320d996c3b4e19870921c47f32}{send\+Queued\+Commands}} ()
+\begin{DoxyCompactList}\small\item\em Sends the queued commands to the low-\/level driver. \end{DoxyCompactList}\item 
+\Hypertarget{class_low_level_driver_a05425f80445bf44c8eb28172531d6264}\label{class_low_level_driver_a05425f80445bf44c8eb28172531d6264} 
+void {\bfseries clear\+Command} ()
+\begin{DoxyCompactList}\small\item\em Clears the command for the low-\/level driver. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_low_level_driver_a7ac0c061618a329d3ac85f829be9dd1d}{process\+Command\+Queue}} ()
+\begin{DoxyCompactList}\small\item\em Processes the command queue. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_low_level_driver_a6dfc0f09b01308d3e746b320d30ef1da}{get\+Command}} () const
+\begin{DoxyCompactList}\small\item\em Gets the command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_low_level_driver_a839439847319c2dec67f53e44593f3ef}{emergency\+Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stops the robot arm immediately in case of an emergency. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a low-\/level driver for communication with a robot arm. 
+
+The \doxylink{class_low_level_driver}{Low\+Level\+Driver} class provides functionality for sending serial messages, controlling servo positions, setting position offsets, queuing commands, and processing the command queue. It uses the Boost.\+Asio library for asynchronous I/O operations and provides an interface for interacting with a robot arm. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_low_level_driver_acea1809582ef5a91afcb0c33dd62af17}\label{class_low_level_driver_acea1809582ef5a91afcb0c33dd62af17} 
+\index{LowLevelDriver@{LowLevelDriver}!LowLevelDriver@{LowLevelDriver}}
+\index{LowLevelDriver@{LowLevelDriver}!LowLevelDriver@{LowLevelDriver}}
+\doxysubsubsection{\texorpdfstring{LowLevelDriver()}{LowLevelDriver()}}
+{\footnotesize\ttfamily Low\+Level\+Driver\+::\+Low\+Level\+Driver (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{port\+\_\+name,  }\item[{uint32\+\_\+t}]{baud\+\_\+rate }\end{DoxyParamCaption})}
+
+
+
+Initialize the \doxylink{class_low_level_driver}{Low\+Level\+Driver} object with the specified parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port\+\_\+name} & The name of the serial port. \\
+\hline
+{\em baud\+\_\+rate} & The baud rate for serial communication. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_low_level_driver_a839439847319c2dec67f53e44593f3ef}\label{class_low_level_driver_a839439847319c2dec67f53e44593f3ef} 
+\index{LowLevelDriver@{LowLevelDriver}!emergencyStop@{emergencyStop}}
+\index{emergencyStop@{emergencyStop}!LowLevelDriver@{LowLevelDriver}}
+\doxysubsubsection{\texorpdfstring{emergencyStop()}{emergencyStop()}}
+{\footnotesize\ttfamily bool Low\+Level\+Driver\+::emergency\+Stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Stops the robot arm immediately in case of an emergency. 
+
+\begin{DoxyReturn}{Returns}
+true if the emergency stop was successful, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_low_level_driver_a6dfc0f09b01308d3e746b320d30ef1da}\label{class_low_level_driver_a6dfc0f09b01308d3e746b320d30ef1da} 
+\index{LowLevelDriver@{LowLevelDriver}!getCommand@{getCommand}}
+\index{getCommand@{getCommand}!LowLevelDriver@{LowLevelDriver}}
+\doxysubsubsection{\texorpdfstring{getCommand()}{getCommand()}}
+{\footnotesize\ttfamily std\+::string Low\+Level\+Driver\+::get\+Command (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Gets the command. 
+
+\begin{DoxyReturn}{Returns}
+The command as a std\+::string. 
+\end{DoxyReturn}
+\Hypertarget{class_low_level_driver_a7ac0c061618a329d3ac85f829be9dd1d}\label{class_low_level_driver_a7ac0c061618a329d3ac85f829be9dd1d} 
+\index{LowLevelDriver@{LowLevelDriver}!processCommandQueue@{processCommandQueue}}
+\index{processCommandQueue@{processCommandQueue}!LowLevelDriver@{LowLevelDriver}}
+\doxysubsubsection{\texorpdfstring{processCommandQueue()}{processCommandQueue()}}
+{\footnotesize\ttfamily bool Low\+Level\+Driver\+::process\+Command\+Queue (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Processes the command queue. 
+
+This function processes the command queue and executes the commands in the order they were received.
+
+\begin{DoxyReturn}{Returns}
+True if the command queue was successfully processed, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_low_level_driver_abd228c3e31b4cf76da3d3589deabaa45}\label{class_low_level_driver_abd228c3e31b4cf76da3d3589deabaa45} 
+\index{LowLevelDriver@{LowLevelDriver}!queueCommand@{queueCommand}}
+\index{queueCommand@{queueCommand}!LowLevelDriver@{LowLevelDriver}}
+\doxysubsubsection{\texorpdfstring{queueCommand()}{queueCommand()}}
+{\footnotesize\ttfamily bool Low\+Level\+Driver\+::queue\+Command (\begin{DoxyParamCaption}\item[{int}]{servo\+\_\+channel,  }\item[{int}]{pulse\+\_\+width,  }\item[{int}]{speed = {\ttfamily 0},  }\item[{int}]{time = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Queues a command to control a servo channel. 
+
+This function allows you to queue a command to control a servo channel with a specific pulse width, speed, and time at the same time.
+
+
+\begin{DoxyParams}{Parameters}
+{\em servo\+\_\+channel} & The servo channel to control. \\
+\hline
+{\em pulse\+\_\+width} & The desired pulse width for the servo channel. \\
+\hline
+{\em speed} & The desired speed for the servo movement (default\+: 0). \\
+\hline
+{\em time} & The desired time for the servo movement (default\+: 0). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was successfully queued, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_low_level_driver_a8dba0d320d996c3b4e19870921c47f32}\label{class_low_level_driver_a8dba0d320d996c3b4e19870921c47f32} 
+\index{LowLevelDriver@{LowLevelDriver}!sendQueuedCommands@{sendQueuedCommands}}
+\index{sendQueuedCommands@{sendQueuedCommands}!LowLevelDriver@{LowLevelDriver}}
+\doxysubsubsection{\texorpdfstring{sendQueuedCommands()}{sendQueuedCommands()}}
+{\footnotesize\ttfamily bool Low\+Level\+Driver\+::send\+Queued\+Commands (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Sends the queued commands to the low-\/level driver. 
+
+This function sends the commands that have been queued up to the low-\/level driver for execution.
+
+\begin{DoxyReturn}{Returns}
+True if the commands were successfully sent, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_low_level_driver_a18b37914840afd55b53736023397d3e3}\label{class_low_level_driver_a18b37914840afd55b53736023397d3e3} 
+\index{LowLevelDriver@{LowLevelDriver}!sendSerialMessage@{sendSerialMessage}}
+\index{sendSerialMessage@{sendSerialMessage}!LowLevelDriver@{LowLevelDriver}}
+\doxysubsubsection{\texorpdfstring{sendSerialMessage()}{sendSerialMessage()}}
+{\footnotesize\ttfamily bool Low\+Level\+Driver\+::send\+Serial\+Message (\begin{DoxyParamCaption}\item[{std\+::string}]{command }\end{DoxyParamCaption})}
+
+
+
+Sends a serial message to the low-\/level driver. 
+
+This function sends a serial message to the low-\/level driver for communication with the robot arm.
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The serial command to be sent. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the message was successfully sent, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_low_level_driver_a15adf2fd951a935dd7f6311f5a4217d7}\label{class_low_level_driver_a15adf2fd951a935dd7f6311f5a4217d7} 
+\index{LowLevelDriver@{LowLevelDriver}!sendServoPositionData@{sendServoPositionData}}
+\index{sendServoPositionData@{sendServoPositionData}!LowLevelDriver@{LowLevelDriver}}
+\doxysubsubsection{\texorpdfstring{sendServoPositionData()}{sendServoPositionData()}}
+{\footnotesize\ttfamily bool Low\+Level\+Driver\+::send\+Servo\+Position\+Data (\begin{DoxyParamCaption}\item[{int}]{servo\+\_\+channel,  }\item[{int}]{pulse\+\_\+width,  }\item[{int}]{speed = {\ttfamily 0},  }\item[{int}]{time = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Sends servo position data to the specified servo channel. 
+
+This function is used to send servo position data to the specified servo channel. It allows setting the pulse width, speed, and time for the servo movement.
+
+
+\begin{DoxyParams}{Parameters}
+{\em servo\+\_\+channel} & The channel number of the servo. \\
+\hline
+{\em pulse\+\_\+width} & The desired pulse width for the servo. \\
+\hline
+{\em speed} & The speed at which the servo should move (optional, default = 0). \\
+\hline
+{\em time} & The time duration for the servo movement (optional, default = 0). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the servo position data was successfully sent, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_low_level_driver_ac0bb3002c1495f4fa0a90fa26abbd898}\label{class_low_level_driver_ac0bb3002c1495f4fa0a90fa26abbd898} 
+\index{LowLevelDriver@{LowLevelDriver}!setServoPositionOffset@{setServoPositionOffset}}
+\index{setServoPositionOffset@{setServoPositionOffset}!LowLevelDriver@{LowLevelDriver}}
+\doxysubsubsection{\texorpdfstring{setServoPositionOffset()}{setServoPositionOffset()}}
+{\footnotesize\ttfamily bool Low\+Level\+Driver\+::set\+Servo\+Position\+Offset (\begin{DoxyParamCaption}\item[{int}]{servo\+\_\+channel,  }\item[{int}]{offset\+\_\+value }\end{DoxyParamCaption})}
+
+
+
+Sets the position offset for a servo channel. 
+
+This function sets the position offset for the specified servo channel.
+
+
+\begin{DoxyParams}{Parameters}
+{\em servo\+\_\+channel} & The channel of the servo. \\
+\hline
+{\em offset\+\_\+value} & The offset value to be set. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the position offset was set successfully, false otherwise. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/sonny/\+Desktop/tmpo/lynxarm\+\_\+srvcli/src/\mbox{\hyperlink{_low_level_driver_8h}{Low\+Level\+Driver.\+h}}\item 
+C\+:/\+Users/sonny/\+Desktop/tmpo/lynxarm\+\_\+srvcli/src/Low\+Level\+Driver.\+cpp\end{DoxyCompactItemize}

@@ -1,17 +1,33 @@
 /**
  * @file LowLevelDriver.h
- * @brief This file contains the declaration of the LowLevelDriver class.
+ * @brief Contains the declaration of the LowLevelDriver class.
+ * 
+ * The LowLevelDriver class provides functionality for sending serial messages, controlling servo positions,
+ * setting position offsets, queuing commands, and processing the command queue. It uses the Boost.Asio library
+ * for asynchronous I/O operations and provides an interface for interacting with a robot arm.
+ * 
+ *  @author Sonny Selten
+ *  @author Elviana Cornelissen
+ *  @version 1.0
+ *  @date 2024-03-07 
  */
 
-#include <iostream>
-#include <string>
-#include <queue>
-#include <boost/asio.hpp>
-#include "Configuration.hpp"
+#ifndef LOW_LEVEL_DRIVER_H
+#define LOW_LEVEL_DRIVER_H
+
+#include <iostream>       
+#include <string>             // Provides a string class.
+#include <queue>              // Provides a queue data structure.
+#include <boost/asio.hpp>     // Provides a cross-platform framework for asynchronous I/O operations.
+#include "Configuration.hpp"  // Contains the configuration parameters for the low-level driver.
 
 /**
  * @class LowLevelDriver
  * @brief Represents a low-level driver for communication with a robot arm.
+ *
+ * The LowLevelDriver class provides functionality for sending serial messages, controlling servo positions,
+ * setting position offsets, queuing commands, and processing the command queue. It uses the Boost.Asio library
+ * for asynchronous I/O operations and provides an interface for interacting with a robot arm.
  */
 class LowLevelDriver
 {
@@ -29,14 +45,6 @@ public:
    * Closes the serial port if it's open.
    */
   ~LowLevelDriver();
-
-  // /**
-  //  * @brief Sends a predefined position to the low-level driver.
-  //  *
-  //  * @param position The predefined position to be sent.
-  //  * @return True if the position was successfully sent, false otherwise.
-  //  */
-  // bool sendPredefinedPosition(predefined_positions position);
 
   /**
    * @brief Sends a serial message to the low-level driver.
@@ -109,13 +117,47 @@ public:
    */
   bool processCommandQueue();
 
+  /**
+   * @brief Gets the command.
+   * 
+   * @return The command as a std::string.
+   */
   std::string getCommand() const;
 
+  /**
+   * @brief Stops the robot arm immediately in case of an emergency.
+   * 
+   * @return true if the emergency stop was successful, false otherwise.
+   */
   bool emergencyStop();
 
 private:
-  boost::asio::io_service ioservice;     /**< Boost asio io_service for handling asynchronous operations */
-  boost::asio::serial_port serial;       /**< Serial port object for communication */
-  std::string command = "";              /**< Command to be sent over serial */
-  std::queue<std::string> commandQueue; /**< Queue for storing commands to be sent */
+  /**
+   * @brief Boost asio io_service for handling asynchronous operations.
+   */
+  boost::asio::io_service ioservice;
+
+  /**
+   * @brief Serial port object for communication.
+   * 
+   * This object represents a serial port used for communication. It is part of the Boost.Asio library,
+   * which provides a cross-platform framework for asynchronous I/O operations. The serial port object
+   * allows reading from and writing to a serial port, enabling communication with external devices.
+   */
+  boost::asio::serial_port serial; 
+
+  /**
+   * @brief The command to be sent over serial.
+   */
+  std::string command = ""; 
+
+  /**
+   * @brief Queue for storing commands to be sent.
+   * 
+   * This queue is used to store commands that need to be sent by the LowLevelDriver.
+   * The commands are stored as strings.
+   */
+  std::queue<std::string> commandQueue;
 };
+
+#endif // LOW_LEVEL_DRIVER_H

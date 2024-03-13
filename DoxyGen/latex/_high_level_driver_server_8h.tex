@@ -1,0 +1,74 @@
+\doxysection{C\+:/\+Users/sonny/\+Desktop/tmpo/lynxarm\+\_\+srvcli/src/\+High\+Level\+Driver\+Server.h File Reference}
+\hypertarget{_high_level_driver_server_8h}{}\label{_high_level_driver_server_8h}\index{C:/Users/sonny/Desktop/tmpo/lynxarm\_srvcli/src/HighLevelDriverServer.h@{C:/Users/sonny/Desktop/tmpo/lynxarm\_srvcli/src/HighLevelDriverServer.h}}
+
+
+Header file for the \doxylink{class_lynxarm_h_l_d}{Lynxarm\+HLD} class.  
+
+
+{\ttfamily \#include "{}rclcpp/rclcpp.\+hpp"{}}\newline
+{\ttfamily \#include "{}rclcpp\+\_\+action/rclcpp\+\_\+action.\+hpp"{}}\newline
+{\ttfamily \#include "{}lynxarm\+\_\+interface/srv/set\+\_\+servo\+\_\+position.\+hpp"{}}\newline
+{\ttfamily \#include "{}lynxarm\+\_\+interface/action/predefined\+\_\+command\+\_\+action.\+hpp"{}}\newline
+{\ttfamily \#include "{}lynxarm\+\_\+interface/action/single\+\_\+servo\+\_\+command.\+hpp"{}}\newline
+{\ttfamily \#include "{}Low\+Level\+Driver.\+cpp"{}}\newline
+{\ttfamily \#include "{}Configuration.\+hpp"{}}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_lynxarm_h_l_d}{Lynxarm\+HLD}}
+\begin{DoxyCompactList}\small\item\em A class representing the high-\/level driver for the Lynxarm robot arm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5}{predefined\+\_\+positions}} \{ \mbox{\hyperlink{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5ad22433eb60c8f12c80d3f45d02709b7b}{PARK}} = 0
+, \mbox{\hyperlink{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5a6564f2f3e15be06b670547bbcaaf0798}{READY}} = 1
+, \mbox{\hyperlink{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5ae381559df278f37419e1d3a0ad88b4b2}{STRAIGHTUP}} = 2
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration of predefined positions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file for the \doxylink{class_lynxarm_h_l_d}{Lynxarm\+HLD} class. 
+
+This file contains the declaration of the \doxylink{class_lynxarm_h_l_d}{Lynxarm\+HLD} class, which represents the high-\/level driver for the Lynxarm robot arm. The class provides high-\/level control functions for the Lynxarm robot arm, including sending commands to move the servos to specified positions, sending predefined commands, initializing the Lynxarm, and handling goal requests and cancellations for predefined command actions.
+
+\begin{DoxyAuthor}{Author}
+Sonny Selten 
+
+Elviana 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2024-\/03-\/07 ~\newline
+ 
+\end{DoxyDate}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5}\label{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5} 
+\index{HighLevelDriverServer.h@{HighLevelDriverServer.h}!predefined\_positions@{predefined\_positions}}
+\index{predefined\_positions@{predefined\_positions}!HighLevelDriverServer.h@{HighLevelDriverServer.h}}
+\doxysubsubsection{\texorpdfstring{predefined\_positions}{predefined\_positions}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5}{predefined\+\_\+positions}}}
+
+
+
+Enumeration of predefined positions. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PARK@{PARK}!HighLevelDriverServer.h@{HighLevelDriverServer.h}}\index{HighLevelDriverServer.h@{HighLevelDriverServer.h}!PARK@{PARK}}}\Hypertarget{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5ad22433eb60c8f12c80d3f45d02709b7b}\label{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5ad22433eb60c8f12c80d3f45d02709b7b} 
+PARK&Park position \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{READY@{READY}!HighLevelDriverServer.h@{HighLevelDriverServer.h}}\index{HighLevelDriverServer.h@{HighLevelDriverServer.h}!READY@{READY}}}\Hypertarget{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5a6564f2f3e15be06b670547bbcaaf0798}\label{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5a6564f2f3e15be06b670547bbcaaf0798} 
+READY&Rest position \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STRAIGHTUP@{STRAIGHTUP}!HighLevelDriverServer.h@{HighLevelDriverServer.h}}\index{HighLevelDriverServer.h@{HighLevelDriverServer.h}!STRAIGHTUP@{STRAIGHTUP}}}\Hypertarget{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5ae381559df278f37419e1d3a0ad88b4b2}\label{_high_level_driver_server_8h_a442e894fa83bb9ac5ea02c90ea908da5ae381559df278f37419e1d3a0ad88b4b2} 
+STRAIGHTUP&Straight up position \\
+\hline
+
+\end{DoxyEnumFields}

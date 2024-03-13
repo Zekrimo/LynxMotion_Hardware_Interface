@@ -1,0 +1,207 @@
+.TH "LowLevelDriver" 3 "Version 1" "LynxMotion AL5D Hardware Interface" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+LowLevelDriver \- Represents a low-level driver for communication with a robot arm\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.PP
+\fR#include <LowLevelDriver\&.h>\fP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBLowLevelDriver\fP (const std::string &port_name, uint32_t baud_rate)"
+.br
+.RI "Initialize the \fBLowLevelDriver\fP object with the specified parameters\&. "
+.ti -1c
+.RI "\fB~LowLevelDriver\fP ()"
+.br
+.RI "Destructor\&. Closes the serial port if it's open\&. "
+.ti -1c
+.RI "bool \fBsendSerialMessage\fP (std::string command)"
+.br
+.RI "Sends a serial message to the low-level driver\&. "
+.ti -1c
+.RI "bool \fBsendServoPositionData\fP (int servo_channel, int pulse_width, int speed=0, int time=0)"
+.br
+.RI "Sends servo position data to the specified servo channel\&. "
+.ti -1c
+.RI "bool \fBsetServoPositionOffset\fP (int servo_channel, int offset_value)"
+.br
+.RI "Sets the position offset for a servo channel\&. "
+.ti -1c
+.RI "bool \fBqueueCommand\fP (int servo_channel, int pulse_width, int speed=0, int time=0)"
+.br
+.RI "Queues a command to control a servo channel\&. "
+.ti -1c
+.RI "bool \fBsendQueuedCommands\fP ()"
+.br
+.RI "Sends the queued commands to the low-level driver\&. "
+.ti -1c
+.RI "void \fBclearCommand\fP ()"
+.br
+.RI "Clears the command for the low-level driver\&. "
+.ti -1c
+.RI "bool \fBprocessCommandQueue\fP ()"
+.br
+.RI "Processes the command queue\&. "
+.ti -1c
+.RI "std::string \fBgetCommand\fP () const"
+.br
+.RI "Gets the command\&. "
+.ti -1c
+.RI "bool \fBemergencyStop\fP ()"
+.br
+.RI "Stops the robot arm immediately in case of an emergency\&. "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Represents a low-level driver for communication with a robot arm\&. 
+
+The \fBLowLevelDriver\fP class provides functionality for sending serial messages, controlling servo positions, setting position offsets, queuing commands, and processing the command queue\&. It uses the Boost\&.Asio library for asynchronous I/O operations and provides an interface for interacting with a robot arm\&. 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "LowLevelDriver::LowLevelDriver (const std::string & port_name, uint32_t baud_rate)"
+
+.PP
+Initialize the \fBLowLevelDriver\fP object with the specified parameters\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIport_name\fP The name of the serial port\&. 
+.br
+\fIbaud_rate\fP The baud rate for serial communication\&. 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "bool LowLevelDriver::emergencyStop ()"
+
+.PP
+Stops the robot arm immediately in case of an emergency\&. 
+.PP
+\fBReturns\fP
+.RS 4
+true if the emergency stop was successful, false otherwise\&. 
+.RE
+.PP
+
+.SS "std::string LowLevelDriver::getCommand () const"
+
+.PP
+Gets the command\&. 
+.PP
+\fBReturns\fP
+.RS 4
+The command as a std::string\&. 
+.RE
+.PP
+
+.SS "bool LowLevelDriver::processCommandQueue ()"
+
+.PP
+Processes the command queue\&. This function processes the command queue and executes the commands in the order they were received\&.
+.PP
+\fBReturns\fP
+.RS 4
+True if the command queue was successfully processed, false otherwise\&. 
+.RE
+.PP
+
+.SS "bool LowLevelDriver::queueCommand (int servo_channel, int pulse_width, int speed = \fR0\fP, int time = \fR0\fP)"
+
+.PP
+Queues a command to control a servo channel\&. This function allows you to queue a command to control a servo channel with a specific pulse width, speed, and time at the same time\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIservo_channel\fP The servo channel to control\&. 
+.br
+\fIpulse_width\fP The desired pulse width for the servo channel\&. 
+.br
+\fIspeed\fP The desired speed for the servo movement (default: 0)\&. 
+.br
+\fItime\fP The desired time for the servo movement (default: 0)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the command was successfully queued, false otherwise\&. 
+.RE
+.PP
+
+.SS "bool LowLevelDriver::sendQueuedCommands ()"
+
+.PP
+Sends the queued commands to the low-level driver\&. This function sends the commands that have been queued up to the low-level driver for execution\&.
+.PP
+\fBReturns\fP
+.RS 4
+True if the commands were successfully sent, false otherwise\&. 
+.RE
+.PP
+
+.SS "bool LowLevelDriver::sendSerialMessage (std::string command)"
+
+.PP
+Sends a serial message to the low-level driver\&. This function sends a serial message to the low-level driver for communication with the robot arm\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIcommand\fP The serial command to be sent\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the message was successfully sent, false otherwise\&. 
+.RE
+.PP
+
+.SS "bool LowLevelDriver::sendServoPositionData (int servo_channel, int pulse_width, int speed = \fR0\fP, int time = \fR0\fP)"
+
+.PP
+Sends servo position data to the specified servo channel\&. This function is used to send servo position data to the specified servo channel\&. It allows setting the pulse width, speed, and time for the servo movement\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIservo_channel\fP The channel number of the servo\&. 
+.br
+\fIpulse_width\fP The desired pulse width for the servo\&. 
+.br
+\fIspeed\fP The speed at which the servo should move (optional, default = 0)\&. 
+.br
+\fItime\fP The time duration for the servo movement (optional, default = 0)\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+true if the servo position data was successfully sent, false otherwise\&. 
+.RE
+.PP
+
+.SS "bool LowLevelDriver::setServoPositionOffset (int servo_channel, int offset_value)"
+
+.PP
+Sets the position offset for a servo channel\&. This function sets the position offset for the specified servo channel\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIservo_channel\fP The channel of the servo\&. 
+.br
+\fIoffset_value\fP The offset value to be set\&. 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+True if the position offset was set successfully, false otherwise\&. 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LynxMotion AL5D Hardware Interface from the source code\&.
